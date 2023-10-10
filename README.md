@@ -1,2 +1,2 @@
-pongtwo2023
-Código de game pong 2 jogadores para aula de Pensamento Computacional.
+# pingpong2023
+Código de game pong para aula de Pensamento Computacional.

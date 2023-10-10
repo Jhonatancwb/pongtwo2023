@@ -134,24 +134,20 @@ let xBolinha = 20;
 let yBolinha = 200;
 let diâmetro = 20;
 let raio = diâmetro / 2;
+
+//velocidade da bolinha
 let velocidadexBolinha = 20;
 let velocidadeyBolinha = 12;
-
-
-
-
+let raqueteComprimento = 12;
+let raqueteAltura = 150;
 
 //variáveis da raquete
-let xRaquete = 0;
+let xRaquete = 3;
 let yRaquete = 150;
-let raqueteComprimento = 15;
-let raqueteAltura = 100;
 
 //variáveis do oponente
 let xRaqueteOponente = 640;
-let yRaqueteOponente = 0;
-let raqueteComprimentoOponente = 15;
-let raqueteAlturaOponente = 100;
+let yRaqueteOponente = 150;
 let velocidadeYOponente;
 
 let colidiu = false;
@@ -199,9 +195,9 @@ function draw() {
     movimentaRaquete();
     //colisãoRaquete();
     colisãoRaquete(xRaquete, yRaquete);
-    mostraRaquete(width-15, yRaqueteOponente);
+    mostraRaquete(width-12, yRaqueteOponente);
     movimentaRaqueteOponente();
-    colisãoRaquete(width-15, yRaqueteOponente);
+    colisãoRaquete(width-12, yRaqueteOponente);
     incluiPlacar();
     marcaPonto();
   
@@ -226,7 +222,7 @@ function movimentaBolinha(){
 
 function colisãoBorda(){
   if (xBolinha + raio > width ||
-    xBolinha - raio < 0)
+    xBolinha -raio < 0)
   {velocidadexBolinha *= -1;
   }
   
@@ -240,48 +236,38 @@ function mostraRaquete(x, y){
   rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
-function movimentaRaqueteOponente(){
-  if (keyIsDown(UP_ARROW)){
-    yRaqueteOponente -= 10;
-}
-  if (keyIsDown(DOWN_ARROW)){
-    yRaqueteOponente += 10;
-}
-}
-
 function movimentaRaquete(){
-  if (keyIsDown(87)){
+  if (keyIsDown(UP_ARROW)){
     yRaquete -= 10;
 }
-  if (keyIsDown(83)){
-    yRaquete += 10;  
+  if (keyIsDown(DOWN_ARROW)){
+    yRaquete += 10;
 }
 }
 
+function movimentaRaqueteOponente() {
+    velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento / 2 -30;
+    yRaqueteOponente += velocidadeYOponente + chanceDeErrar
+  calculaChanceDeErrar();
 
-// function movimentaRaqueteOponente() {
-//     velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimentoOponente / 2 -30;
-//     yRaqueteOponente += velocidadeYOponente + chanceDeErrar
-//   calculaChanceDeErrar();
+}
 
-// }
-
-// function calculaChanceDeErrar() {
-//   if (pontosDoOponente >= meusPontos) {
-//     chanceDeErrar += 1
-//     if (chanceDeErrar >= 39){
-//     chanceDeErrar = 40
-//     }
-//   } else {
-//     chanceDeErrar -= 1
-//     if (chanceDeErrar <= 35){
-//     chanceDeErrar = 35
-//     }
-//   }
-// }
+function calculaChanceDeErrar() {
+  if (pontosDoOponente >= meusPontos) {
+    chanceDeErrar += 1
+    if (chanceDeErrar >= 39){
+    chanceDeErrar = 40
+    }
+  } else {
+    chanceDeErrar -= 1
+    if (chanceDeErrar <= 35){
+    chanceDeErrar = 35
+    }
+  }
+}
 
 function colisãoRaquete(){
-  if (xBolinha - raio - xRaquete + raqueteComprimento && yBolinha + raio > yRaquete0){velocidadexBolinha *= -1;
+  if (xBolinha - raio - xRaquete + raqueteCpmprimento && yBolinha + raio > yRaquete0){velocidadexBolinha *= -1;
     raquetada.play();                                       }
 }
 
@@ -309,10 +295,10 @@ function incluiPlacar(){
     }
 
 function marcaPonto(){
-  if (xBolinha > width-1){meusPontos += 1;
+  if (xBolinha > width-7){meusPontos += 1;
   ponto.play();
   }
-  if (xBolinha < 1){pontosDoOponente += 1;
+  if (xBolinha < 11){pontosDoOponente += 1;
   ponto.play();}
 }
 
