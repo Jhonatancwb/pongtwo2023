@@ -1,2 +1,2 @@
-# pongtwo2023
-site de prendizagem
+pongtwo2023
+Código de game pong 2 jogadores para aula de Pensamento Computacional.
